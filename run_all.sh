@@ -1,0 +1,25 @@
+python3 day01.py
+# python3 day02.py
+# python3 day03.py
+# python3 day04.py
+# python3 day05.py
+# python3 day06.py
+# python3 day07.py
+# python3 day08.py
+# python3 day09.py
+# python3 day10.py
+# python3 day11.py
+# python3 day12.py
+# python3 day13.py
+# python3 day14.py
+# python3 day15.py
+# python3 day16.py
+# python3 day17.py
+# python3 day18.py
+# python3 day19.py
+# python3 day20.py
+# python3 day21.py
+# python3 day22.py
+# python3 day23.py
+# python3 day24.py
+# python3 day25.py
