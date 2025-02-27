@@ -2,21 +2,30 @@ from util.files import *
 from util.runner import *
 import time
 
-TESTING = True
-
+TESTING = False
 lines = GetLines(6, TESTING)
-PrintLines(lines)
-def parse():
-    _ = lines
-    return
 
 def part1():
-    parse()
-    return 0
+    processed = 3
+    for line in lines:
+        chars = set()
+        for i in range(len(line)):
+            chars = set(line[i:i+4])
+            processed += 1
+            if len(chars) == 4:
+                break
+    return processed
 
 def part2():
-    parse()
-    return 0
+    processed = 13
+    for line in lines:
+        chars = set()
+        for i in range(len(line)):
+            chars = set(line[i:i+14])
+            processed += 1
+            if len(chars) == 14:
+                break
+    return processed
 
 
 start1 = time.perf_counter()
