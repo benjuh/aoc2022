@@ -1,22 +1,91 @@
 from util.files import *
 from util.runner import *
 import time
+import collections
 
-TESTING = True
+TESTING = False
 
 lines = GetLines(12, TESTING)
-PrintLines(lines)
+
+start = []
+end = []
+grid = []
 def parse(lines):
-    _ = lines
+    start.clear()
+    end.clear()
+    grid.clear()
+    for y, line in enumerate(lines):
+        row = []
+        for x, c in enumerate(line):
+            val = line[x]
+            if c == 'S':
+                start.append((y, x))
+                val = 'a'
+            if c == 'E':
+                end.append((y, x))
+                val = 'z'
+            elevation = ord(val) - ord('a')
+            row.append(elevation)
+        grid.append(row)
     return
 
+directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+def hikeUp(source, dest):
+    queue = collections.deque()
+    visited = set()
+    queue.append([source])
+    while queue:
+        path = queue.popleft()
+        row, col = path[-1]
+        elevation = grid[row][col]
+        if (row, col) not in visited:
+            visited.add((row, col))
+            if (row, col) == dest:
+                return len(path) - 1
+            for dx, dy in directions:
+                x = col + dx
+                y = row + dy
+                if x < 0 or x >= len(grid[0]) or y < 0 or y >= len(grid):
+                    continue
+            
+                nh = grid[y][x]
+                if nh <= elevation + 1:
+                    path_copy = path[:]
+                    path_copy.append((y, x))
+                    queue.append(path_copy)
+def hikeDown(dest):
+    queue = collections.deque()
+    visited = set()
+    queue.append([dest])
+    while queue:
+        path = queue.popleft()
+        row, col = path[-1]
+        elevation = grid[row][col]
+        if (row, col) not in visited:
+            visited.add((row, col))
+            if grid[row][col] == 0:
+                return len(path) - 1
+            for dx, dy in directions:
+                x = col + dx
+                y = row + dy
+                if x < 0 or x >= len(grid[0]) or y < 0 or y >= len(grid):
+                    continue
+            
+                nh = grid[y][x]
+                if nh >= elevation - 1:
+                    path_copy = path[:]
+                    path_copy.append((y, x))
+                    queue.append(path_copy)
+                    
 def part1():
     parse(lines)
-    return 0
+    dist = hikeUp(start[0], end[0])
+    return dist
 
 def part2():
     parse(lines)
-    return 0
+    dist = hikeDown(end[0])
+    return dist
 
 
 start1 = time.perf_counter()
