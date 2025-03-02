@@ -8,7 +8,6 @@ def parse():
     with open("data/day16.txt") as f:
         return [re.findall('[A-Z]+|\\d+', line[1:]) for line in f.readlines()]
 
-
 def part1():
     puzzle = parse()
     graph = {valve:leads for valve, _, *leads in puzzle}
