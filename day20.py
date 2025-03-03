@@ -46,9 +46,6 @@ def part2():
     return sum([mixed[(idx_zero_tuple + i) % len(numbers)][1]
           for i in [1000, 2000, 3000]])
 
-    return 0
-
-
 start1 = time.perf_counter()
 ans1 = part1()
 time1 = time.perf_counter() - start1
